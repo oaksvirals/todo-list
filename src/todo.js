@@ -1,9 +1,12 @@
+import { categories } from "./categories";
+
 export {
     todoList,
     makeTodo,
     changePriority,
     completeTodo,
-    removeTodo
+    removeTodo,
+    changeCategory
 };
 
 const todoList = [];
@@ -15,7 +18,8 @@ const makeTodo = (title, desc, due, priority) => {
         desc,
         due,
         priority,
-        status: 'pending'
+        status: 'pending',
+        category: 'default'
     };
 
     return todoList.push(thisTodo);
@@ -51,5 +55,31 @@ function removeTodo(title) {
         todoList.splice(location, 1);
     } else {
         return;
+    };
+};
+
+function changeCategory(title, category) {
+
+    let foundTitle = false;
+    let foundCategory = false;
+
+    todoList.forEach((element) => {
+        if (element.title === title) {
+            foundTitle = true;
+        };
+    });
+
+    for (let i = 0; i < categories.length; i++) {
+        if (categories[i] === category) {
+            foundCategory = true;
+        };
+    };
+
+    if (foundTitle === true && foundCategory === true) {
+        todoList.forEach((element) => {
+            if (element.title === title) {
+                element.category = category;
+            };
+        });
     };
 };
