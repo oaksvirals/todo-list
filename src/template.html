@@ -6,6 +6,33 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
-    <h1>Test</h1>
+    <div class="app">
+        <header>
+            <h1>A Todo List Project</h1>
+        </header>
+        <aside>
+            <section class="newTasks">
+                <h3>New Task</h3>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" />
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" />
+                <label for="due">Due</label>
+                <input type="date" id="due" name="due" />
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                    <option value="default">Default</option>
+                </select>
+                <button>Add Item</button>
+            </section>
+        </aside>
+        <main></main>
+    </div>
 </body>
 </html>

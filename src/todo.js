@@ -48,6 +48,7 @@ function removeTodo(title) {
     for (let i = 0; i < todoList.length; i++) {
         if (todoList[i].title === title) {
             location = i;
+            break;
         };
     };
 
@@ -72,6 +73,7 @@ function changeCategory(title, category) {
     for (let i = 0; i < categories.length; i++) {
         if (categories[i] === category) {
             foundCategory = true;
+            break;
         };
     };
 
