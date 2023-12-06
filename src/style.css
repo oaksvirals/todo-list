@@ -49,13 +49,23 @@ aside {
     color: var(--main);
 }
 
+.newTasks h2 {
+    text-align: center;
+}
+
 .newTasks input, select, button {
     display: block;
     width: 100%;
+    outline: none;
 }
 
 .newTasks label {
     font-weight: bold;
+    font-size: 18px;
+}
+
+.newTasks input, select {
+    padding: 5px;
 }
 
 .newTasks button {
@@ -71,4 +81,18 @@ aside {
 .newTasks button:hover {
     cursor: pointer;
     transform: scale(0.95);
+}
+
+.filter {
+    color: var(--main);
+}
+
+.filter h2 {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.filter label {
+    font-weight: bold;
+    font-size: 18px;
 }

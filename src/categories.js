@@ -2,7 +2,7 @@ import { indexOf } from "lodash";
 
 export { categories, makeCategory, removeCategory };
 
-const categories = ['default'];
+const categories = ['Default'];
 
 function makeCategory(name) {
 

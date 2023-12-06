@@ -33,10 +33,31 @@ const makeBacon = makeTodo('make bacon', 'make it hot', 'tomorrow', 'high');
 const makeHam = makeTodo('make ham', 'make it greasy', 'tonight', 'low');
 const makeChicken = makeTodo('make chicken', 'make it cold', 'morning', 'medium');
 
-makeCategory('kitchen');
+makeCategory('Kitchen');
 changePriority('make bacon', 'low');
 // removeCategory('kitchen');
 changeCategory('make bacon', 'kitchen');
 
 console.log(todoList);
 console.log(categories);
+
+// category handling
+const category = document.querySelector('#category');
+const filterCategory = document.querySelector('#filterCategory');
+
+function displayCategories() {
+
+    for (let i = 0; i < categories.length; i++) {
+        const categoryOption = document.createElement('option');
+        category.appendChild(categoryOption);
+        categoryOption.textContent = categories[i];
+        categoryOption.setAttribute('value', categories[i]);
+
+        const filterOption = document.createElement('option');
+        filterCategory.appendChild(filterOption);
+        filterOption.textContent = categories[i];
+        filterOption.setAttribute('value', categories[i]);
+    };
+};
+
+displayCategories();
