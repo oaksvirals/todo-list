@@ -1,7 +1,9 @@
 :root {
     --main: #156064;
     --accent: #26C485;
+    --accentRGB: rgb(38, 196, 133, 0.5);
     --off: #DDD1C7;
+    --required: rgb(243, 89, 89);
 }
 
 * {
@@ -45,11 +47,19 @@ aside {
     }
 }
 
-.newTasks {
+aside section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.newTasks,
+.filter {
     color: var(--main);
 }
 
-.newTasks h2 {
+.newTasks h2,
+.filter h2 {
     text-align: center;
 }
 
@@ -59,13 +69,22 @@ aside {
     outline: none;
 }
 
-.newTasks label {
+.newTasks label,
+.filter label {
     font-weight: bold;
     font-size: 18px;
 }
 
 .newTasks input, select {
     padding: 5px;
+    outline: none;
+    border: none;
+}
+
+.newTasks input:focus,
+.newTasks select:focus,
+.filter select:focus {
+    background-color: var(--accentRGB);
 }
 
 .newTasks button {
@@ -78,21 +97,15 @@ aside {
     margin-top: 10px;
 }
 
+.newTasks .removeCategoryBtn {
+    background-color: rgb(243, 89, 89);
+}
+
 .newTasks button:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
 
-.filter {
-    color: var(--main);
-}
-
 .filter h2 {
     padding-top: 20px;
-    text-align: center;
-}
-
-.filter label {
-    font-weight: bold;
-    font-size: 18px;
 }

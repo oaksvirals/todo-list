@@ -41,10 +41,16 @@ changeCategory('make bacon', 'kitchen');
 console.log(todoList);
 console.log(categories);
 
-// category handling
+// selectors
+const addItemButton = document.querySelector('#addItem');
+const title = document.querySelector('#title');
+const description = document.querySelector('#description');
+const due = document.querySelector('#due');
+const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
 
+// category handling
 function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
@@ -61,3 +67,32 @@ function displayCategories() {
 };
 
 displayCategories();
+
+// new task handling
+const newTask = () => {
+
+    if (title.value === '') {
+        title.style.backgroundColor = 'var(--required)';
+    }
+    if (description.value === '') {
+        description.style.backgroundColor = 'var(--required)';
+    }
+    if (due.value === '') {
+        due.style.backgroundColor = 'var(--required)';
+    };
+
+    if (title.value === '' || description.value === '' || due.value === '') {
+        return;
+    }
+
+    makeTodo(title.value, description.value, due.value, priority.value, category.value);
+    
+    title.value = '';
+    description.value = '';
+    due.value = '';
+    title.style.backgroundColor = null;
+    description.style.backgroundColor = null;
+    due.style.backgroundColor = null;
+};
+
+addItemButton.addEventListener('click', newTask);

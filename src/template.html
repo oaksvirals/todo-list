@@ -14,11 +14,11 @@
             <section class="newTasks">
                 <h2>New Task</h2>
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" />
+                <input type="text" id="title" name="title" required/>
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description" />
+                <input type="text" id="description" name="description" required/>
                 <label for="due">Due</label>
-                <input type="date" id="due" name="due" />
+                <input type="date" id="due" name="due" required/>
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">
                     <option value="low">Low</option>
@@ -29,7 +29,8 @@
                 <select name="category" id="category">
                 </select>
                 <button id="addItem">Add Item</button>
-                <button id="newCategory">New Category</button>
+                <button id="newCategoryBtn">New Category</button>
+                <button class="removeCategoryBtn">Remove Category</button>
             </section>
             <section class="filter">
                 <h2>Filter View</h2>
@@ -55,9 +56,6 @@
                     <option value="filteredYesComplete">Completed</option>
                     <option value="filteredNoComplete">Not Completed</option>
                 </select>
-            </section>
-            <section class="options">
-                <button class="deleteCategory">Remove Category</button>
             </section>
         </aside>
         <main></main>

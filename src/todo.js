@@ -11,15 +11,15 @@ export {
 
 const todoList = [];
 
-const makeTodo = (title, desc, due, priority) => {
+const makeTodo = (title, desc, due, priority, category, status = 'pending') => {
 
     const thisTodo = {
         title,
         desc,
         due,
         priority,
-        status: 'pending',
-        category: 'default'
+        category,
+        status
     };
 
     return todoList.push(thisTodo);
