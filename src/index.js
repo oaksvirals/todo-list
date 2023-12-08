@@ -29,9 +29,9 @@ import { categories, makeCategory, removeCategory } from './categories';
 // delete a todo
 
 // test subjects
-const makeBacon = makeTodo('make bacon', 'make it hot', 'tomorrow', 'high');
-const makeHam = makeTodo('make ham', 'make it greasy', 'tonight', 'low');
-const makeChicken = makeTodo('make chicken', 'make it cold', 'morning', 'medium');
+const makeBacon = makeTodo('make bacon', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia mollitia atque quam quibusdam iste sapiente totam, illum, iure corporis ipsum distinctio adipisci asperiores voluptatum expedita eaque cupiditate dolor esse veritatis.', 'tomorrow', 'high', 'default');
+const makeHam = makeTodo('make ham', 'make it greasy', 'tonight', 'low', 'kitchen');
+const makeChicken = makeTodo('make chicken', 'make it cold', 'morning', 'medium', 'kitchen');
 
 makeCategory('Kitchen');
 changePriority('make bacon', 'low');
@@ -102,7 +102,62 @@ const newTask = () => {
 addItemButton.addEventListener('click', newTask);
 
 // task display
-// const taskBox = document.createElement('div');
-// taskBox.setAttribute('class', 'task');
+function displayTasks() {
+    
+    for (let i = 0; i < todoList.length; i++) {
 
-// main.appendChild(taskBox);
+        const task = document.createElement('div');
+        task.setAttribute('class', 'task');
+        main.appendChild(task);
+
+        const taskTitle = document.createElement('h2');
+        taskTitle.setAttribute('class', 'taskTitle');
+        taskTitle.textContent = todoList[i].title;
+        task.appendChild(taskTitle);
+
+        const meta = document.createElement('div');
+        meta.setAttribute('class', 'meta');
+        task.appendChild(meta);
+
+        const due = document.createElement('p');
+        const priority = document.createElement('p');
+        const category = document.createElement('p');
+
+        due.setAttribute('class', 'taskDue');
+        priority.setAttribute('class', 'taskPriority');
+        category.setAttribute('class', 'taskCategory');
+
+        due.textContent = todoList[i].due;
+        priority.textContent = todoList[i].priority;
+        category.textContent = todoList[i].category;
+
+        meta.appendChild(due);
+        meta.appendChild(priority);
+        meta.appendChild(category);
+
+        const description = document.createElement('p');
+        description.setAttribute('class', 'taskDescription');
+        description.textContent = todoList[i].desc;
+        task.appendChild(description);
+
+        const taskButtons = document.createElement('div');
+        taskButtons.setAttribute('class', 'taskBtns');
+        task.appendChild(taskButtons);
+
+        const completeBtn = document.createElement('button');
+        const deleteBtn = document.createElement('button');
+
+        completeBtn.setAttribute('class', 'taskCompleteBtn');
+        deleteBtn.setAttribute('class', 'taskDeleteBtn');
+
+        completeBtn.textContent = 'Complete';
+        deleteBtn.textContent = 'Delete';
+
+        taskButtons.appendChild(completeBtn);
+        taskButtons.appendChild(deleteBtn);
+
+    }
+
+};
+
+displayTasks();
