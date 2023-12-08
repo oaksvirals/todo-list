@@ -29,14 +29,14 @@ import { categories, makeCategory, removeCategory } from './categories';
 // delete a todo
 
 // test subjects
-const makeBacon = makeTodo('make bacon', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia mollitia atque quam quibusdam iste sapiente totam, illum, iure corporis ipsum distinctio adipisci asperiores voluptatum expedita eaque cupiditate dolor esse veritatis.', 'tomorrow', 'high', 'default');
-const makeHam = makeTodo('make ham', 'make it greasy', 'tonight', 'low', 'kitchen');
-const makeChicken = makeTodo('make chicken', 'make it cold', 'morning', 'medium', 'kitchen');
+const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '2023-12-10', 'High', 'Default');
+const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Kitchen');
+const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Kitchen');
 
 makeCategory('Kitchen');
-changePriority('make bacon', 'low');
+changePriority('make bacon', 'Low');
 // removeCategory('kitchen');
-changeCategory('make bacon', 'kitchen');
+changeCategory('make bacon', 'Kitchen');
 
 console.log(todoList);
 console.log(categories);
@@ -52,7 +52,7 @@ const filterCategory = document.querySelector('#filterCategory');
 const main = document.querySelector('main');
 
 // category handling
-function displayCategories() {
+(function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
         const categoryOption = document.createElement('option');
@@ -65,9 +65,7 @@ function displayCategories() {
         filterOption.textContent = categories[i];
         filterOption.setAttribute('value', categories[i]);
     };
-};
-
-displayCategories();
+})();
 
 // new task handling
 const newTask = () => {
@@ -97,9 +95,10 @@ const newTask = () => {
 
     console.log(todoList, 'new task handling');
 
-};
+    clearDisplay();
+    displayTasks();
 
-addItemButton.addEventListener('click', newTask);
+};
 
 // task display
 function displayTasks() {
@@ -161,3 +160,16 @@ function displayTasks() {
 };
 
 displayTasks();
+
+// clear display
+function clearDisplay() {
+
+        const task = document.querySelectorAll('.task');
+        task.forEach((element) => {
+            element.remove();
+        });
+
+};
+
+// event listeners
+addItemButton.addEventListener('click', newTask);

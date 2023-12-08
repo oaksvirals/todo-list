@@ -164,6 +164,11 @@ main {
     padding: 10px;
 }
 
+.task .taskDescription {
+    width: 225px;
+    height:165px;
+}
+
 .taskCompleteBtn,
 .taskDeleteBtn {
     padding: 5px;
