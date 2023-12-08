@@ -49,6 +49,7 @@ const due = document.querySelector('#due');
 const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
+const main = document.querySelector('main');
 
 // category handling
 function displayCategories() {
@@ -86,13 +87,22 @@ const newTask = () => {
     }
 
     makeTodo(title.value, description.value, due.value, priority.value, category.value);
-    
+
     title.value = '';
     description.value = '';
     due.value = '';
     title.style.backgroundColor = null;
     description.style.backgroundColor = null;
     due.style.backgroundColor = null;
+
+    console.log(todoList, 'new task handling');
+
 };
 
 addItemButton.addEventListener('click', newTask);
+
+// task display
+// const taskBox = document.createElement('div');
+// taskBox.setAttribute('class', 'task');
+
+// main.appendChild(taskBox);

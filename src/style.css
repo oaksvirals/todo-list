@@ -4,15 +4,18 @@
     --accentRGB: rgb(38, 196, 133, 0.5);
     --off: #DDD1C7;
     --required: rgb(243, 89, 89);
+    --red: rgb(243, 89, 89);
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
     height: 100%;
-    margin: 0;
+    /* margin: 0; */
 }
 
 .app {
@@ -87,7 +90,8 @@ aside section {
     background-color: var(--accentRGB);
 }
 
-.newTasks button {
+.newTasks button,
+.filter button {
     background-color: var(--accent);
     border: none;
     border-radius: 8px;
@@ -97,15 +101,85 @@ aside section {
     margin-top: 10px;
 }
 
-.newTasks .removeCategoryBtn {
-    background-color: rgb(243, 89, 89);
+.newTasks .removeCategoryBtn,
+.filter .resetFilterBtn {
+    background-color: var(--red);
 }
 
-.newTasks button:hover {
+.newTasks button:hover,
+.filter button:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
 
 .filter h2 {
     padding-top: 20px;
+}
+
+main {
+    padding: 25px 25px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.task {
+    border: 1px solid rgb(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    width: 250px;
+    height: 280px;
+}
+
+.task .meta {
+    display: flex;
+    gap: 20px;
+    color: var(--main);
+    font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 225px;
+}
+
+.task .taskTitle,
+.task .taskDescription {
+    padding: 10px 0px;
+}
+
+.task .taskTitle {
+    font-size: 16px;
+}
+
+.taskBtns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    padding: 10px;
+}
+
+.taskCompleteBtn,
+.taskDeleteBtn {
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: var(--accent);
+}
+
+.taskDeleteBtn {
+    background-color: var(--red);
+}
+
+.taskCompleteBtn:hover,
+.taskDeleteBtn:hover {
+    cursor: pointer;
+    transform: scale(0.95);
 }
