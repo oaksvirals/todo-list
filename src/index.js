@@ -1,6 +1,7 @@
 import './style.css';
 import { todoList, makeTodo, changePriority, completeTodo, removeTodo, changeCategory } from './todo';
 import { categories, makeCategory, removeCategory } from './categories';
+import { indexOf } from 'lodash';
 
 // -- Todo Min Requirments --
 // Title
@@ -54,11 +55,14 @@ const newCatModal = document.querySelector('.newCatModal');
 const newCatButton = document.querySelector('#newCategoryBtn');
 const overlay = document.querySelector('.overlay');
 const closeCatModal = document.querySelector('.modalCloseCategoryMenu');
+const addCatButton = document.querySelector('.modalAddCategory');
+const modalCatInput = document.querySelector('.modalCatInput');
 
 displayTasks();
+displayCategories();
 
 // categories: init and handling
-(function displayCategories() {
+function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
         const categoryOption = document.createElement('option');
@@ -71,9 +75,9 @@ displayTasks();
         filterOption.textContent = categories[i];
         filterOption.setAttribute('value', categories[i]);
     };
-})();
+};
 
-const newTask = () => {
+function newTask() {
 
     if (title.value === '') {
         title.style.backgroundColor = 'var(--required)';
@@ -182,7 +186,22 @@ function closeNewCatModal() {
     overlay.classList.add('hidden');
 };
 
+function addNewCat() {
+
+    if (categories.indexOf(modalCatInput.value) < 0) {
+        makeCategory(modalCatInput.value); 
+        const categoryOption = document.createElement('option');
+        category.appendChild(categoryOption);
+        categoryOption.textContent = modalCatInput.value;
+        categoryOption.setAttribute('value', modalCatInput.value);
+        modalCatInput.value = ''
+        modalCatInput.focus();
+    };
+
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openNewCatModal);
 closeCatModal.addEventListener('click', closeNewCatModal);
+addCatButton.addEventListener('click', addNewCat);

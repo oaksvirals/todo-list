@@ -82,6 +82,7 @@ aside section {
     padding: 5px;
     outline: none;
     border: none;
+    border-radius: 8px;
 }
 
 .newTasks input:focus,
@@ -206,6 +207,7 @@ main {
     background-color: rgb(0, 0, 0, 0.2);
     backdrop-filter: blur(3px);
     z-index: 1;
+    display: none; /* not sure if I wanna keep the overlay */
 }
 
 .newCatModal {
@@ -255,7 +257,7 @@ main {
     border-radius: 8px;
     border: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     background-color: var(--accent);
 }
 

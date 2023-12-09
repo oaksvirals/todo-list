@@ -7,7 +7,8 @@ const categories = ['Default'];
 function makeCategory(name) {
 
     if (categories.indexOf(name) < 0) {
-       categories.push(name); 
+       categories.push(name);
+       console.log(categories); 
     } else {
         return;
     };
