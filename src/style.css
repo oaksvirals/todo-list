@@ -188,3 +188,82 @@ main {
     cursor: pointer;
     transform: scale(0.95);
 }
+
+/* Modals */
+
+.hidden {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 45px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+.newCatModal {
+    /* border: 1px solid rgb(0, 0, 0, 0.2); */
+    background-color: var(--off);
+    /* border-radius: 8px; */
+    padding: 25px;
+    text-align: center;
+    margin: 0;
+    z-index: 2;
+
+    /* position: fixed; */
+    /* top: 10%;
+    left: 10%; */
+    grid-row: 2;
+    grid-column: 1;
+    width: 300px;
+    padding: 20px;
+}
+
+@media (max-width: 992px) {
+    .newCatModal {
+        width: 180px;
+    }
+}
+
+.newCatModal h2 {
+    color: var(--main);
+    padding: 10px;
+    margin: 0;
+}
+
+.newCatModal input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+}
+
+.newCatModal input:focus {
+    outline: none;
+}
+
+.newCatModal button {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: var(--accent);
+}
+
+.newCatModal button:hover {
+    cursor: pointer;
+    transform: scale(0.95);
+}
+
+.newCatModal .modalCloseCategoryMenu {
+    background-color: var(--red);
+}

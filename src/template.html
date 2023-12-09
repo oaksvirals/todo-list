@@ -11,6 +11,7 @@
             <h1>A Todo List Project</h1>
         </header>
         <aside>
+            <!-- new tasks area of sidebar -->
             <section class="newTasks">
                 <h2>New Task</h2>
                 <label for="title">Title</label>
@@ -32,6 +33,7 @@
                 <button id="newCategoryBtn">New Category</button>
                 <button class="removeCategoryBtn">Remove Category</button>
             </section>
+            <!-- filter view area of sidebar -->
             <section class="filter">
                 <h2>Filter View</h2>
                 <label for="filterCategory">Category</label>
@@ -58,6 +60,7 @@
                 </select>
                 <button class="resetFilterBtn">Clear Filter</button>
             </section>
+
         </aside>
         <main>
             <!-- <div class="task">
@@ -74,6 +77,13 @@
                 </div>
             </div> -->
         </main>
+        <section class="newCatModal hidden">
+            <h2>Add Categories</h2>
+            <input type="text" maxlength="10" placeholder="Max 10 Characters" />
+            <button class="modalAddCategory">Add</button>
+            <button class="modalCloseCategoryMenu">Close</button>
+        </section>
+        <div class="overlay hidden"></div>
     </div>
 </body>
 </html>

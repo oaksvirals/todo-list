@@ -33,10 +33,10 @@ const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '20
 const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Kitchen');
 const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Kitchen');
 
-makeCategory('Kitchen');
+makeCategory('ABCDEFGHIJKLMNO');
 changePriority('make bacon', 'Low');
 // removeCategory('kitchen');
-changeCategory('make bacon', 'Kitchen');
+changeCategory('make bacon', 'ABCDEFGHIJKLMNO');
 
 console.log(todoList);
 console.log(categories);
@@ -50,8 +50,14 @@ const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
 const main = document.querySelector('main');
+const newCatModal = document.querySelector('.newCatModal');
+const newCatButton = document.querySelector('#newCategoryBtn');
+const overlay = document.querySelector('.overlay');
+const closeCatModal = document.querySelector('.modalCloseCategoryMenu');
 
-// category handling
+displayTasks();
+
+// categories: init and handling
 (function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
@@ -67,7 +73,6 @@ const main = document.querySelector('main');
     };
 })();
 
-// new task handling
 const newTask = () => {
 
     if (title.value === '') {
@@ -100,7 +105,6 @@ const newTask = () => {
 
 };
 
-// task display
 function displayTasks() {
     
     for (let i = 0; i < todoList.length; i++) {
@@ -159,9 +163,6 @@ function displayTasks() {
 
 };
 
-displayTasks();
-
-// clear display
 function clearDisplay() {
 
         const task = document.querySelectorAll('.task');
@@ -171,5 +172,17 @@ function clearDisplay() {
 
 };
 
+function openNewCatModal() {
+    newCatModal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+};
+
+function closeNewCatModal() {
+    newCatModal.classList.add('hidden');
+    overlay.classList.add('hidden');
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
+newCatButton.addEventListener('click', openNewCatModal);
+closeCatModal.addEventListener('click', closeNewCatModal);
