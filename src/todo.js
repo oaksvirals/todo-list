@@ -2,14 +2,16 @@ import { categories } from "./categories";
 
 export {
     todoList,
+    completedList,
     makeTodo,
     changePriority,
-    completeTodo,
-    removeTodo,
-    changeCategory
+    changeCategory,
+    deleteTodo,
+    undoComplete
 };
 
 const todoList = [];
+const completedList = [];
 
 const makeTodo = (title, desc, due, priority, category, status = 'pending') => {
 
@@ -33,31 +35,31 @@ function changePriority(title, priority) {
     });
 };
 
-function completeTodo(title) {
-    todoList.forEach((element) => {
-        if (element.title === title) {
-            element.status = 'complete';
-        };
-    });
-};
+// function completeTodo(title) {
+//     todoList.forEach((element) => {
+//         if (element.title === title) {
+//             element.status = 'complete';
+//         };
+//     });
+// };
 
-function removeTodo(title) {
+// function removeTodo(title) {
 
-    let location;
+//     let location;
 
-    for (let i = 0; i < todoList.length; i++) {
-        if (todoList[i].title === title) {
-            location = i;
-            break;
-        };
-    };
+//     for (let i = 0; i < todoList.length; i++) {
+//         if (todoList[i].title === title) {
+//             location = i;
+//             break;
+//         };
+//     };
 
-    if (location >= 0) {
-        todoList.splice(location, 1);
-    } else {
-        return;
-    };
-};
+//     if (location >= 0) {
+//         todoList.splice(location, 1);
+//     } else {
+//         return;
+//     };
+// };
 
 function changeCategory(title, category) {
 
@@ -84,4 +86,23 @@ function changeCategory(title, category) {
             };
         });
     };
+};
+
+function deleteTodo(index) {
+
+    todoList[index].status = 'complete';
+    completedList.push(todoList[index]);
+    todoList.splice(index, 1);
+
+    console.log(todoList)
+    console.log(completedList)
+
+};
+
+function undoComplete(index) {
+
+    completedList[index].status = 'pending';
+    todoList.push(completedList[index]);
+    completedList.splice(index, 1);
+
 };

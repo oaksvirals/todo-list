@@ -1,5 +1,5 @@
 import './style.css';
-import { todoList, makeTodo, changePriority, completeTodo, removeTodo, changeCategory } from './todo';
+import { todoList, completedList, makeTodo, changePriority, removeTodo, changeCategory, deleteTodo, undoComplete } from './todo';
 import { categories, makeCategory, removeCategory } from './categories';
 import { indexOf } from 'lodash';
 
@@ -160,7 +160,9 @@ function displayTasks() {
         const deleteBtn = document.createElement('button');
 
         completeBtn.setAttribute('class', 'taskCompleteBtn');
+        completeBtn.setAttribute('value', todoList[i].title);
         deleteBtn.setAttribute('class', 'taskDeleteBtn');
+        deleteBtn.setAttribute('value', todoList[i].title);
 
         completeBtn.textContent = 'Complete';
         deleteBtn.textContent = 'Delete';
@@ -168,7 +170,22 @@ function displayTasks() {
         taskButtons.appendChild(completeBtn);
         taskButtons.appendChild(deleteBtn);
 
-    }
+        function clickDelete() {
+
+            const index = todoList.findIndex(task => task.title === completeBtn.value);
+            deleteTodo(index);
+            clearDisplay();
+            displayTasks();
+            
+        };
+
+        function clickComplete() { // TO DO: maybe change styling of the task
+
+        };
+
+        deleteBtn.addEventListener('click', clickDelete);
+
+    };
 
 };
 
