@@ -102,7 +102,11 @@ aside section {
     margin-top: 10px;
 }
 
-.newTasks .removeCategoryBtn,
+.newTasks #manageCategoryBtn {
+    background-color: var(--main);
+    color: var(--off);
+}
+
 .filter .resetFilterBtn {
     background-color: var(--red);
 }
@@ -210,7 +214,7 @@ main {
     display: none; /* not sure if I wanna keep the overlay */
 }
 
-.newCatModal {
+.catModal {
     /* border: 1px solid rgb(0, 0, 0, 0.2); */
     background-color: var(--off);
     /* border-radius: 8px; */
@@ -229,29 +233,29 @@ main {
 }
 
 @media (max-width: 992px) {
-    .newCatModal {
+    .catModal {
         width: 180px;
     }
 }
 
-.newCatModal h2 {
+.catModal h2 {
     color: var(--main);
     padding: 10px;
     margin: 0;
 }
 
-.newCatModal input {
+.catModal input {
     width: 100%;
     padding: 5px;
     border: none;
     border-radius: 8px;
 }
 
-.newCatModal input:focus {
+.catModal input:focus {
     outline: none;
 }
 
-.newCatModal button {
+.catModal button {
     margin-top: 10px;
     padding: 5px;
     border-radius: 8px;
@@ -261,11 +265,21 @@ main {
     background-color: var(--accent);
 }
 
-.newCatModal button:hover {
+.catModal button:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
 
-.newCatModal .modalCloseCategoryMenu {
+.catModal .modalAddCategory {
+    margin-bottom: 20px;
+}
+
+.catModal .removeCategoryBtn {
     background-color: var(--red);
+    margin-bottom: 20px;
+}
+
+.catModal .modalCloseCategoryMenu {
+    background-color: var(--main);
+    color: var(--off);
 }

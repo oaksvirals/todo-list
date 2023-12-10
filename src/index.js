@@ -34,10 +34,9 @@ const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '20
 const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Kitchen');
 const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Kitchen');
 
-makeCategory('ABCDEFGHIJKLMNO');
+makeCategory('Family');
+makeCategory('Coding');
 changePriority('make bacon', 'Low');
-// removeCategory('kitchen');
-changeCategory('make bacon', 'ABCDEFGHIJKLMNO');
 
 console.log(todoList);
 console.log(categories);
@@ -51,18 +50,18 @@ const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
 const main = document.querySelector('main');
-const newCatModal = document.querySelector('.newCatModal');
-const newCatButton = document.querySelector('#newCategoryBtn');
+const catModal = document.querySelector('.catModal');
+const newCatButton = document.querySelector('#manageCategoryBtn');
 const overlay = document.querySelector('.overlay');
-const closeCatModal = document.querySelector('.modalCloseCategoryMenu');
+const closeCatModalBtn = document.querySelector('.modalCloseCategoryMenu');
 const addCatButton = document.querySelector('.modalAddCategory');
 const modalCatInput = document.querySelector('.modalCatInput');
+const removeCategoryList = document.querySelector('#removeCategory');
+const removeCategoryListBtn = document.querySelector('.removeCategoryBtn');
 
 displayTasks();
-displayCategories();
 
-// categories: init and handling
-function displayCategories() {
+(function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
         const categoryOption = document.createElement('option');
@@ -74,8 +73,14 @@ function displayCategories() {
         filterCategory.appendChild(filterOption);
         filterOption.textContent = categories[i];
         filterOption.setAttribute('value', categories[i]);
+
+        const removeCategoryOption = document.createElement('option');
+        removeCategoryList.appendChild(removeCategoryOption);
+        removeCategoryOption.text = categories[i];
+        removeCategoryOption.setAttribute('value', categories[i]);
+
     };
-};
+})();
 
 function newTask() {
 
@@ -176,32 +181,64 @@ function clearDisplay() {
 
 };
 
-function openNewCatModal() {
-    newCatModal.classList.remove('hidden');
+function openCatModal() {
+    catModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
 };
 
-function closeNewCatModal() {
-    newCatModal.classList.add('hidden');
+function closeCatModal() {
+    catModal.classList.add('hidden');
     overlay.classList.add('hidden');
 };
 
 function addNewCat() {
 
-    if (categories.indexOf(modalCatInput.value) < 0) {
+    if (modalCatInput.value !== '' && categories.indexOf(modalCatInput.value) < 0) {
+        
         makeCategory(modalCatInput.value); 
+
         const categoryOption = document.createElement('option');
         category.appendChild(categoryOption);
         categoryOption.textContent = modalCatInput.value;
         categoryOption.setAttribute('value', modalCatInput.value);
+
+        const removeCategoryOption = document.createElement('option');
+        removeCategoryList.appendChild(removeCategoryOption);
+        removeCategoryOption.text = modalCatInput.value;
+        removeCategoryOption.setAttribute('value', modalCatInput.value);
+
+        const filterCategoryOption = document.createElement('option');
+        filterCategory.appendChild(filterCategoryOption);
+        filterCategoryOption.text = modalCatInput.value;
+        filterCategoryOption.setAttribute('value', modalCatInput.value);
+
         modalCatInput.value = ''
         modalCatInput.focus();
     };
 
 };
 
+function removeSelectedCat() {
+
+    if (removeCategoryList.value === 'Default') {
+        return;
+    };
+
+    removeCategory(removeCategoryList.value);
+
+    const removeOption = document.querySelectorAll('option[value=' + removeCategoryList.value +']');
+
+    removeOption.forEach((item) => {
+        item.remove();
+    });
+
+    console.log(categories);
+
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
-newCatButton.addEventListener('click', openNewCatModal);
-closeCatModal.addEventListener('click', closeNewCatModal);
+newCatButton.addEventListener('click', openCatModal);
+closeCatModalBtn.addEventListener('click', closeCatModal);
 addCatButton.addEventListener('click', addNewCat);
+removeCategoryListBtn.addEventListener('click', removeSelectedCat);

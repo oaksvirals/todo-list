@@ -30,8 +30,7 @@
                 <select name="category" id="category">
                 </select>
                 <button id="addItem">Add Item</button>
-                <button id="newCategoryBtn">New Category</button>
-                <button class="removeCategoryBtn">Remove Category</button>
+                <button id="manageCategoryBtn">Manage Categories</button>
             </section>
             <!-- filter view area of sidebar -->
             <section class="filter">
@@ -77,11 +76,14 @@
                 </div>
             </div> -->
         </main>
-        <section class="newCatModal hidden">
+        <section class="catModal hidden">
             <h2>Add Categories</h2>
             <input class="modalCatInput" type="text" maxlength="10" placeholder="Max 10 Characters" />
             <button class="modalAddCategory">Add</button>
-            <button class="modalCloseCategoryMenu">Close</button>
+            <h2>Remove Categories</h2>
+            <select name="removeCategory" id="removeCategory"></select>
+            <button class="removeCategoryBtn">Remove</button>
+            <button class="modalCloseCategoryMenu">Return</button>
         </section>
         <div class="overlay hidden"></div>
     </div>
