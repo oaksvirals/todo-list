@@ -52,12 +52,13 @@ const filterCategory = document.querySelector('#filterCategory');
 const main = document.querySelector('main');
 const catModal = document.querySelector('.catModal');
 const newCatButton = document.querySelector('#manageCategoryBtn');
-const overlay = document.querySelector('.overlay');
+// const overlay = document.querySelector('.overlay');
 const closeCatModalBtn = document.querySelector('.modalCloseCategoryMenu');
 const addCatButton = document.querySelector('.modalAddCategory');
 const modalCatInput = document.querySelector('.modalCatInput');
 const removeCategoryList = document.querySelector('#removeCategory');
 const removeCategoryListBtn = document.querySelector('.removeCategoryBtn');
+const hideCompletedBtn = document.querySelector('#hideCompleteBtn');
 
 displayTasks();
 
@@ -187,6 +188,10 @@ function displayTasks() {
                 completeBtn.style.backgroundColor = 'var(--off)';
                 completeBtn.style.color = 'var(--main)';
 
+                if (hideCompletedBtn.textContent === 'Show Completed') {
+                    task.classList.add('hideTask');
+                };
+
             } else if (completeBtn.textContent === 'Undo') {
 
                 task.classList.remove('overlay');
@@ -267,9 +272,38 @@ function removeSelectedCat() {
 
 };
 
+function toggleCompleted() {
+
+    const tasks = document.querySelectorAll('.overlay');
+    const hiddenTasks = document.querySelectorAll('.hideTask');
+
+    if (hideCompletedBtn.textContent === 'Hide Completed') {
+
+        tasks.forEach((task) => {
+            task.classList.add('hideTask');
+        });
+
+        hideCompletedBtn.textContent = 'Show Completed';
+        hideCompletedBtn.style.backgroundColor = 'black';
+
+    } else if (hideCompletedBtn.textContent === 'Show Completed') {
+
+        hiddenTasks.forEach((task) => {
+            task.classList.remove('hideTask');
+        });
+
+        hideCompletedBtn.textContent = 'Hide Completed';
+        hideCompletedBtn.style.backgroundColor = 'var(--main)';
+        hideCompletedBtn.style.color = 'var(--off)';
+
+    };
+    
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openCatModal);
 closeCatModalBtn.addEventListener('click', closeCatModal);
 addCatButton.addEventListener('click', addNewCat);
 removeCategoryListBtn.addEventListener('click', removeSelectedCat);
+hideCompletedBtn.addEventListener('click', toggleCompleted);
