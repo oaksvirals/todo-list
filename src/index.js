@@ -50,6 +50,7 @@ const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
 const filterPriority = document.querySelector('#filterPriority');
+const filterResetBtn = document.querySelector('.resetFilterBtn');
 const main = document.querySelector('main');
 const catModal = document.querySelector('.catModal');
 const newCatButton = document.querySelector('#manageCategoryBtn');
@@ -355,6 +356,20 @@ function filterByPriority() {
 
 };
 
+function resetFilter() {
+
+    const tasks =  document.querySelectorAll('.task');
+
+    tasks.forEach((task) => {
+        task.classList.remove('hideByCategory');
+        task.classList.remove('hideByPriority');
+    });
+
+    filterCategory.value = 'none';
+    filterPriority.value = 'none';
+
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openCatModal);
@@ -364,3 +379,4 @@ removeCategoryListBtn.addEventListener('click', removeSelectedCat);
 hideCompletedBtn.addEventListener('click', toggleCompleted);
 filterCategory.addEventListener('change', filterByCategory);
 filterPriority.addEventListener('change', filterByPriority);
+filterResetBtn.addEventListener('click', resetFilter);
