@@ -30,9 +30,9 @@ import { indexOf } from 'lodash';
 // delete a todo
 
 // test subjects
-const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '2023-12-10', 'High', 'Default');
-const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Kitchen');
-const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Kitchen');
+const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '2023-12-10', 'High', 'Family');
+const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Coding');
+const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Default');
 
 makeCategory('Family');
 makeCategory('Coding');
@@ -300,6 +300,50 @@ function toggleCompleted() {
     
 };
 
+// test logic for filter
+
+function filterTasks(data, key) {
+
+    let sortedData;
+
+    if (key === 'category') {
+
+    } else if (key === 'date') {
+
+    } else if (key === 'priority') {
+
+    };
+
+    console.log(todoList, 'sorted');
+};
+
+function filterByCategory() {
+
+    const taskCats = document.querySelectorAll('.task .meta .taskCategory');
+
+    if (filterCategory.value === 'none') {
+
+        taskCats.forEach((task) => {
+            task.parentNode.parentNode.classList.remove('hideByCategory');
+        });
+        return;
+
+    } else {
+
+        taskCats.forEach((task) => {
+
+        task.parentNode.parentNode.classList.remove('hideByCategory');
+
+        if (task.textContent !== filterCategory.value) {
+                task.parentNode.parentNode.classList.add('hideByCategory');
+            };
+
+    });
+
+    };
+
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openCatModal);
@@ -307,3 +351,4 @@ closeCatModalBtn.addEventListener('click', closeCatModal);
 addCatButton.addEventListener('click', addNewCat);
 removeCategoryListBtn.addEventListener('click', removeSelectedCat);
 hideCompletedBtn.addEventListener('click', toggleCompleted);
+filterCategory.addEventListener('change', filterByCategory);
