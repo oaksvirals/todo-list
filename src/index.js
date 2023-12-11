@@ -174,15 +174,31 @@ function displayTasks() {
 
             const index = todoList.findIndex(task => task.title === completeBtn.value);
             deleteTodo(index);
-            clearDisplay();
-            displayTasks();
+            task.remove();
             
         };
 
-        function clickComplete() { // TO DO: maybe change styling of the task
+        function clickComplete() {
+            
+            if (completeBtn.textContent === 'Complete') {
+
+                task.classList.add('overlay');
+                completeBtn.textContent = 'Undo';
+                completeBtn.style.backgroundColor = 'var(--off)';
+                completeBtn.style.color = 'var(--main)';
+
+            } else if (completeBtn.textContent === 'Undo') {
+
+                task.classList.remove('overlay');
+                completeBtn.textContent = 'Complete';
+                completeBtn.style.backgroundColor = 'var(--accent)';
+                completeBtn.style.color = 'black';
+
+            };
 
         };
 
+        completeBtn.addEventListener('click', clickComplete);
         deleteBtn.addEventListener('click', clickDelete);
 
     };
@@ -200,12 +216,10 @@ function clearDisplay() {
 
 function openCatModal() {
     catModal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
 };
 
 function closeCatModal() {
     catModal.classList.add('hidden');
-    overlay.classList.add('hidden');
 };
 
 function addNewCat() {
