@@ -49,6 +49,7 @@ const due = document.querySelector('#due');
 const priority = document.querySelector('#priority');
 const category = document.querySelector('#category');
 const filterCategory = document.querySelector('#filterCategory');
+const filterPriority = document.querySelector('#filterPriority');
 const main = document.querySelector('main');
 const catModal = document.querySelector('.catModal');
 const newCatButton = document.querySelector('#manageCategoryBtn');
@@ -300,23 +301,6 @@ function toggleCompleted() {
     
 };
 
-// test logic for filter
-
-function filterTasks(data, key) {
-
-    let sortedData;
-
-    if (key === 'category') {
-
-    } else if (key === 'date') {
-
-    } else if (key === 'priority') {
-
-    };
-
-    console.log(todoList, 'sorted');
-};
-
 function filterByCategory() {
 
     const taskCats = document.querySelectorAll('.task .meta .taskCategory');
@@ -344,6 +328,33 @@ function filterByCategory() {
 
 };
 
+function filterByPriority() {
+
+    const taskPriority = document.querySelectorAll('.task .meta .taskPriority');
+
+    if (filterPriority.value === 'none') {
+
+        taskPriority.forEach((task) => {
+            task.parentNode.parentNode.classList.remove('hideByPriority');
+        });
+        return;
+
+    } else {
+
+        taskPriority.forEach((task) => {
+
+        task.parentNode.parentNode.classList.remove('hideByPriority');
+
+        if (task.textContent !== filterPriority.value) {
+                task.parentNode.parentNode.classList.add('hideByPriority');
+            };
+
+    });
+
+    };
+
+};
+
 // event listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openCatModal);
@@ -352,3 +363,4 @@ addCatButton.addEventListener('click', addNewCat);
 removeCategoryListBtn.addEventListener('click', removeSelectedCat);
 hideCompletedBtn.addEventListener('click', toggleCompleted);
 filterCategory.addEventListener('change', filterByCategory);
+filterPriority.addEventListener('change', filterByPriority);

@@ -195,11 +195,17 @@ main {
     transform: scale(0.95);
 }
 
+/* JS */
+
 .hideTask {
     display: none;
 }
 
 .hideByCategory {
+    display: none;
+}
+
+.hideByPriority {
     display: none;
 }
 
