@@ -3,45 +3,18 @@ import { todoList, completedList, makeTodo, changePriority, removeTodo, changeCa
 import { categories, makeCategory, removeCategory } from './categories';
 import { indexOf } from 'lodash';
 
-// -- Todo Min Requirments --
-// Title
-// Description
-// dueDate
-// Priority
-// -- Todo Other Ideas --
-// Notes
-// Checklist
-
-// -- Project Lists (Categories) --
-// Start with Default Category
-// User can create additional categories
-// Ability to assign todos into categories
-
-// -- Modules --
-// Creating New Todo
-// Marking Todos Complete
-// Changing Priorities
-// DOM Manipulation
-
-// -- UI --
-// view all projects
-// view all todos in each project (probably just title, duedate, changing color for diff priorities)
-// expand single todo to see/edit its details
-// delete a todo
-
-// test subjects
-const makeBacon = makeTodo('make bacon', 'cupiditate dolor esse veritatis.', '2023-12-10', 'High', 'Family');
-const makeHam = makeTodo('make ham', 'make it greasy', '2023-12-15', 'Low', 'Coding');
-const makeChicken = makeTodo('make chicken', 'make it cold', '2024-04-10', 'Medium', 'Default');
+// Populating Todo App with display content.
+const makeBacon = makeTodo('Create a Todo App', 'Create the Todo list project from The Odin Project.', '2023-12-20', 'High', 'Coding');
+const makeHam = makeTodo('Record YouTube Video', 'Make a "day in my life" video for the channel. YT.com@wesleyoaks', '2023-12-18', 'Medium', 'YouTube');
+const makeChicken = makeTodo('Return Library Books', 'I almost forgot to return the books last time... not again!', '2023-12-19', 'Low', 'Default');
 
 makeCategory('Family');
 makeCategory('Coding');
-changePriority('make bacon', 'Low');
+makeCategory('YouTube');
 
-console.log(todoList);
-console.log(categories);
+let editingTask = '';
 
-// selectors
+// Global Selectors
 const addItemButton = document.querySelector('#addItem');
 const title = document.querySelector('#title');
 const description = document.querySelector('#description');
@@ -61,12 +34,21 @@ const removeCategoryList = document.querySelector('#removeCategory');
 const removeCategoryListBtn = document.querySelector('.removeCategoryBtn');
 const hideCompletedBtn = document.querySelector('#hideCompleteBtn');
 const taskModalCategory = document.querySelector('#taskModalCategory');
+const taskModal = document.querySelector('.taskModal');
+const taskModalExitBtn = document.querySelector('.taskModalExitBtn');
+const editModalTitle = document.querySelector('#taskModalTitle');
+const editModalDescription = document.querySelector('#taskModalDescription');
+const editModalDate = document.querySelector('#taskModalDue');
+const editModalPriority = document.querySelector('#taskModalPriority');
+const editModalCategory = document.querySelector('#taskModalCategory');
+const editModalSubmitBtn = document.querySelector('.taskModalSubmitBtn');
 
 displayTasks();
 
 (function displayCategories() {
 
     for (let i = 0; i < categories.length; i++) {
+
         const categoryOption = document.createElement('option');
         category.appendChild(categoryOption);
         categoryOption.textContent = categories[i];
@@ -88,6 +70,7 @@ displayTasks();
         taskModalOption.setAttribute('value', categories[i]);
 
     };
+
 })();
 
 function newTask() {
@@ -115,8 +98,6 @@ function newTask() {
     description.style.backgroundColor = null;
     due.style.backgroundColor = null;
 
-    console.log(todoList, 'new task handling');
-
     clearDisplay();
     displayTasks();
 
@@ -126,12 +107,14 @@ function displayTasks() {
     
     for (let i = 0; i < todoList.length; i++) {
 
+        // Building out the task tile
         const task = document.createElement('div');
         task.setAttribute('class', 'task');
         main.appendChild(task);
 
         const taskTitle = document.createElement('h2');
         taskTitle.setAttribute('class', 'taskTitle');
+        taskTitle.setAttribute('value', todoList[i].title)
         taskTitle.textContent = todoList[i].title;
         task.appendChild(taskTitle);
 
@@ -166,34 +149,42 @@ function displayTasks() {
 
         const completeBtn = document.createElement('button');
         const deleteBtn = document.createElement('button');
+        const editBtn = document.createElement('button');
 
         completeBtn.setAttribute('class', 'taskCompleteBtn');
         completeBtn.setAttribute('value', todoList[i].title);
         deleteBtn.setAttribute('class', 'taskDeleteBtn');
         deleteBtn.setAttribute('value', todoList[i].title);
+        editBtn.setAttribute('class', 'taskEditBtn');
+        editBtn.setAttribute('value', todoList[i].title);
 
-        completeBtn.textContent = 'Complete';
+        completeBtn.textContent = 'Done';
         deleteBtn.textContent = 'Delete';
+        editBtn.textContent = 'Edit';
 
         taskButtons.appendChild(completeBtn);
         taskButtons.appendChild(deleteBtn);
+        taskButtons.appendChild(editBtn);
 
         function clickDelete() {
 
-            const index = todoList.findIndex(task => task.title === completeBtn.value);
+            const index = todoList.findIndex(task => task.title === deleteBtn.value);
             deleteTodo(index);
             task.remove();
             
         };
 
         function clickComplete() {
+
+            const index = todoList.findIndex(task => task.title === completeBtn.value);
             
-            if (completeBtn.textContent === 'Complete') {
+            if (completeBtn.textContent === 'Done') {
 
                 task.classList.add('overlay');
                 completeBtn.textContent = 'Undo';
                 completeBtn.style.backgroundColor = 'var(--off)';
                 completeBtn.style.color = 'var(--main)';
+                todoList[index].status = 'complete';
 
                 if (hideCompletedBtn.textContent === 'Show Completed') {
                     task.classList.add('hideTask');
@@ -202,19 +193,48 @@ function displayTasks() {
             } else if (completeBtn.textContent === 'Undo') {
 
                 task.classList.remove('overlay');
-                completeBtn.textContent = 'Complete';
+                completeBtn.textContent = 'Done';
                 completeBtn.style.backgroundColor = 'var(--accent)';
                 completeBtn.style.color = 'black';
+                todoList[index].status = 'pending';
 
             };
+
+            console.log(todoList)
 
         };
 
         completeBtn.addEventListener('click', clickComplete);
         deleteBtn.addEventListener('click', clickDelete);
 
-        // make tasks editable
+        // Apply edit values to modal
 
+        function editFields() {
+
+            const index = todoList.findIndex(task => task.title === editBtn.value);
+
+            editingTask = todoList[index].title;
+
+            editModalTitle.value = todoList[index].title;
+            editModalDescription.value = todoList[index].desc;
+            editModalDate.value = todoList[index].due;
+            editModalPriority.value = todoList[index].priority;
+            editModalCategory.value = todoList[index].category;
+
+        };
+
+        editBtn.addEventListener('click', openTaskModal);
+        editBtn.addEventListener('click', editFields);
+        
+        // Check if task was marked complete already and apply settings
+        if (todoList[i].status === 'complete') {
+
+            task.classList.add('overlay');
+            completeBtn.textContent = 'Undo';
+            completeBtn.style.backgroundColor = 'var(--off)';
+            completeBtn.style.color = 'var(--main)';
+
+        };
 
     };
 
@@ -234,8 +254,17 @@ function openCatModal() {
 };
 
 function closeCatModal() {
+    removeCategoryList.style.backgroundColor = '';
     catModal.classList.add('hidden');
 };
+
+function openTaskModal() {
+    taskModal.classList.remove('hidden');
+}
+
+function closeTaskModal() {
+    taskModal.classList.add('hidden');
+}
 
 function addNewCat() {
 
@@ -258,8 +287,14 @@ function addNewCat() {
         filterCategoryOption.text = modalCatInput.value;
         filterCategoryOption.setAttribute('value', modalCatInput.value);
 
+        const editTaskCategoryOption = document.createElement('option');
+        taskModalCategory.appendChild(editTaskCategoryOption);
+        editTaskCategoryOption.text = modalCatInput.value;
+        editTaskCategoryOption.setAttribute('value', modalCatInput.value);
+
         modalCatInput.value = ''
         modalCatInput.focus();
+
     };
 
 };
@@ -267,6 +302,7 @@ function addNewCat() {
 function removeSelectedCat() {
 
     if (removeCategoryList.value === 'Default') {
+        removeCategoryList.style.backgroundColor = 'var(--red)';
         return;
     };
 
@@ -278,7 +314,7 @@ function removeSelectedCat() {
         item.remove();
     });
 
-    console.log(categories);
+    removeCategoryList.style.backgroundColor = '';
 
 };
 
@@ -378,7 +414,23 @@ function resetFilter() {
 
 };
 
-// event listeners
+function updateTask() {
+
+    const index = todoList.findIndex(task => task.title === editingTask);
+
+    todoList[index].title = editModalTitle.value;
+    todoList[index].desc = editModalDescription.value;
+    todoList[index].due = editModalDate.value;
+    todoList[index].priority = editModalPriority.value;
+    todoList[index].category = editModalCategory.value;
+    
+    closeTaskModal();
+    clearDisplay();
+    displayTasks();
+
+};
+
+// Applying Event Listeners
 addItemButton.addEventListener('click', newTask);
 newCatButton.addEventListener('click', openCatModal);
 closeCatModalBtn.addEventListener('click', closeCatModal);
@@ -388,3 +440,5 @@ hideCompletedBtn.addEventListener('click', toggleCompleted);
 filterCategory.addEventListener('change', filterByCategory);
 filterPriority.addEventListener('change', filterByPriority);
 filterResetBtn.addEventListener('click', resetFilter);
+taskModalExitBtn.addEventListener('click', closeTaskModal);
+editModalSubmitBtn.addEventListener('click', updateTask);

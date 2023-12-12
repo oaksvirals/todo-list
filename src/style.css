@@ -136,10 +136,17 @@ main {
     border: 1px solid rgb(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 10px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 
     width: 250px;
     height: 280px;
+    transition: 500ms;
+}
+
+.task:hover {
+    box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+    transition: 500ms;
 }
 
 .task .meta {
@@ -174,10 +181,12 @@ main {
 .task .taskDescription {
     width: 225px;
     height:165px;
+    overflow: hidden;
 }
 
 .taskCompleteBtn,
-.taskDeleteBtn {
+.taskDeleteBtn,
+.taskEditBtn {
     padding: 5px;
     border: none;
     border-radius: 8px;
@@ -190,8 +199,14 @@ main {
     background-color: var(--red);
 }
 
+.taskEditBtn {
+    background-color: var(--main);
+    color: var(--off);
+}
+
 .taskCompleteBtn:hover,
-.taskDeleteBtn:hover {
+.taskDeleteBtn:hover,
+.taskEditBtn:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
@@ -212,10 +227,6 @@ main {
 
 /* Modals */
 
-.hidden {
-    display: none;
-}
-
 .overlay {
     background-color: var(--accentRGB);
     backdrop-filter: blur(3px);
@@ -226,7 +237,6 @@ main {
 .taskModal {
     background-color: var(--off);
     padding: 25px;
-    /* text-align: center; */
     margin: 0;
     z-index: 2;
 
@@ -238,6 +248,10 @@ main {
 
 @media (max-width: 992px) {
     .catModal {
+        width: 180px;
+    }
+
+    .taskModal {
         width: 180px;
     }
 }
@@ -299,4 +313,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.hidden {
+    display: none;
 }
