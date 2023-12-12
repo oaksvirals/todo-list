@@ -15,7 +15,6 @@
 
 html, body {
     height: 100%;
-    /* margin: 0; */
 }
 
 .app {
@@ -57,7 +56,8 @@ aside section {
 }
 
 .newTasks,
-.filter {
+.filter,
+.taskModal {
     color: var(--main);
 }
 
@@ -73,7 +73,8 @@ aside section {
 }
 
 .newTasks label,
-.filter label {
+.filter label,
+.taskModal {
     font-weight: bold;
     font-size: 18px;
 }
@@ -216,31 +217,19 @@ main {
 }
 
 .overlay {
-    /* position: fixed;
-    top: 45px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%; */
-    /* background-color: rgb(0, 0, 0, 0.3); */
     background-color: var(--accentRGB);
     backdrop-filter: blur(3px);
     z-index: 1;
 }
 
-.catModal {
-    /* border: 1px solid rgb(0, 0, 0, 0.2); */
+.catModal,
+.taskModal {
     background-color: var(--off);
-    /* border-radius: 8px; */
     padding: 25px;
-    text-align: center;
+    /* text-align: center; */
     margin: 0;
     z-index: 2;
 
-    /* position: fixed; */
-    /* top: 10%;
-    left: 10%; */
     grid-row: 2;
     grid-column: 1;
     width: 300px;
@@ -253,24 +242,29 @@ main {
     }
 }
 
-.catModal h2 {
+.catModal h2,
+.taskModal h2 {
     color: var(--main);
     padding: 10px;
     margin: 0;
+    text-align: center;
 }
 
-.catModal input {
+.catModal input,
+.taskModal input {
     width: 100%;
     padding: 5px;
     border: none;
     border-radius: 8px;
 }
 
-.catModal input:focus {
+.catModal input:focus,
+.taskModal input:focus {
     outline: none;
 }
 
-.catModal button {
+.catModal button,
+.taskModal button {
     margin-top: 10px;
     padding: 5px;
     border-radius: 8px;
@@ -280,7 +274,8 @@ main {
     background-color: var(--accent);
 }
 
-.catModal button:hover {
+.catModal button:hover,
+.taskModal button:hover {
     cursor: pointer;
     transform: scale(0.95);
 }
@@ -289,7 +284,8 @@ main {
     margin-bottom: 20px;
 }
 
-.catModal .removeCategoryBtn {
+.catModal .removeCategoryBtn,
+.taskModal .taskModalExitBtn {
     background-color: var(--red);
     margin-bottom: 20px;
 }
@@ -297,4 +293,10 @@ main {
 .catModal .modalCloseCategoryMenu {
     background-color: var(--main);
     color: var(--off);
+}
+
+.taskModal {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

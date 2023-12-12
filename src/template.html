@@ -75,7 +75,7 @@
             <button class="removeCategoryBtn">Remove</button>
             <button class="modalCloseCategoryMenu">Return</button>
         </section>
-        <section class="taskModal">
+        <section class="taskModal hidden">
             <h2>Edit Task</h2>
             <label for="taskModalTitle">Title</label>
             <input id="taskModalTitle" type="text" maxlength="28" placeholder="Max 28 characters">
@@ -91,7 +91,10 @@
             </select>
             <label for="taskModalCategory">Category</label>
             <select name="taskModalCategory" id="taskModalCategory"></select>
+            <button class="taskModalSubmitBtn">Submit Changes</button>
+            <button class="taskModalExitBtn">Exit</button>
         </section>
+        
     </div>
 </body>
 </html>
