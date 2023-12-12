@@ -54,13 +54,13 @@ const filterResetBtn = document.querySelector('.resetFilterBtn');
 const main = document.querySelector('main');
 const catModal = document.querySelector('.catModal');
 const newCatButton = document.querySelector('#manageCategoryBtn');
-// const overlay = document.querySelector('.overlay');
 const closeCatModalBtn = document.querySelector('.modalCloseCategoryMenu');
 const addCatButton = document.querySelector('.modalAddCategory');
 const modalCatInput = document.querySelector('.modalCatInput');
 const removeCategoryList = document.querySelector('#removeCategory');
 const removeCategoryListBtn = document.querySelector('.removeCategoryBtn');
 const hideCompletedBtn = document.querySelector('#hideCompleteBtn');
+const taskModalCategory = document.querySelector('#taskModalCategory');
 
 displayTasks();
 
@@ -79,8 +79,13 @@ displayTasks();
 
         const removeCategoryOption = document.createElement('option');
         removeCategoryList.appendChild(removeCategoryOption);
-        removeCategoryOption.text = categories[i];
+        removeCategoryOption.textContent = categories[i];
         removeCategoryOption.setAttribute('value', categories[i]);
+
+        const taskModalOption = document.createElement('option');
+        taskModalCategory.appendChild(taskModalOption);
+        taskModalOption.textContent = categories[i];
+        taskModalOption.setAttribute('value', categories[i]);
 
     };
 })();
@@ -207,6 +212,9 @@ function displayTasks() {
 
         completeBtn.addEventListener('click', clickComplete);
         deleteBtn.addEventListener('click', clickDelete);
+
+        // make tasks editable
+
 
     };
 

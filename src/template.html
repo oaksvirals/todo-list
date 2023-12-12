@@ -40,12 +40,6 @@
                 <select name="filterCategory" id="filterCategory">
                     <option value="none">(Sort by Category)</option>
                 </select>
-                <label for="filterDate">Due Date</label>
-                <select name="filterDate" id="filterDate">
-                    <option value="none">(Sort by Date)</option>
-                    <option value="ascending">Ascending</option>
-                    <option value="descending">Descending</option>
-                </select>
                 <label for="filterPriority">Priority</label>
                 <select name="filterPriority" id="filterPriority">
                     <option value="none">(Sort by Priority)</option>
@@ -53,12 +47,6 @@
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
                 </select>
-                <!-- <label for="filterCompleted">Completed</label>
-                <select name="filterCompleted" id="filterCompleted">
-                    <option value="none">(Sort by Completed)</option>
-                    <option value="filteredYesComplete">Completed</option>
-                    <option value="filteredNoComplete">Not Completed</option>
-                </select> -->
                 <button class="resetFilterBtn">Clear Filter</button>
             </section>
 
@@ -87,7 +75,23 @@
             <button class="removeCategoryBtn">Remove</button>
             <button class="modalCloseCategoryMenu">Return</button>
         </section>
-        <!-- <div class="overlay hidden"></div> -->
+        <section class="taskModal">
+            <h2>Edit Task</h2>
+            <label for="taskModalTitle">Title</label>
+            <input id="taskModalTitle" type="text" maxlength="28" placeholder="Max 28 characters">
+            <label for="taskModalDescription">Description</label>
+            <input id="taskModalDescription" type="text" maxlength="230" placeholder="Max 230 characters">
+            <label for="taskModalDue">Due</label>
+            <input type="date" name="taskModalDue" id="taskModalDue">
+            <label for="taskModalPriority">Priority</label>
+            <select name="taskModalPriority" id="taskModalPriority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <label for="taskModalCategory">Category</label>
+            <select name="taskModalCategory" id="taskModalCategory"></select>
+        </section>
     </div>
 </body>
 </html>
