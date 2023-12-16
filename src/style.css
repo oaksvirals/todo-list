@@ -128,7 +128,6 @@ main {
 
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 20px;
 }
 
@@ -211,6 +210,26 @@ main {
     transform: scale(0.95);
 }
 
+.github {
+    position: fixed;
+    bottom: 10px;
+    left: 80px;
+
+    width: 125px;
+    background-color: black;
+    color: #fafafa;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+}
+
+.github:hover {
+    transform: scale(0.95);
+    cursor: pointer;
+}
+
 /* JS */
 
 .hideTask {
@@ -253,6 +272,10 @@ main {
 
     .taskModal {
         width: 180px;
+    }
+
+    .github {
+        left: 25px;
     }
 }
 

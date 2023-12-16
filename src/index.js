@@ -1,16 +1,38 @@
 import './style.css';
-import { todoList, completedList, makeTodo, changePriority, removeTodo, changeCategory, deleteTodo, undoComplete } from './todo';
+import { todoList, makeTodo, deleteTodo } from './todo';
 import { categories, makeCategory, removeCategory } from './categories';
-import { indexOf } from 'lodash';
+import { get, indexOf } from 'lodash';
 
-// Populating Todo App with display content.
-const makeBacon = makeTodo('Create a Todo App', 'Create the Todo list project from The Odin Project.', '2023-12-20', 'High', 'Coding');
-const makeHam = makeTodo('Record YouTube Video', 'Make a "day in my life" video for the channel. YT.com@wesleyoaks', '2023-12-18', 'Medium', 'YouTube');
-const makeChicken = makeTodo('Return Library Books', 'I almost forgot to return the books last time... not again!', '2023-12-19', 'Low', 'Default');
+// Populating Todo App with demo display content.
+(function init() {
 
-makeCategory('Family');
-makeCategory('Coding');
-makeCategory('YouTube');
+    const localList = JSON.parse(localStorage.getItem('todo'));
+    const localCategory = JSON.parse(localStorage.getItem('category'));
+
+    if (localList !== null) {
+
+        for (let i = 0; i < localList.length; i++) {
+            todoList.push(localList[i])
+        };
+
+        // Starts at 1 to skip Default
+        for (let i = 1; i < localCategory.length; i++) {
+            categories.push(localCategory[i]);
+        };
+
+    } else {
+        
+        makeTodo('Create a Todo App', 'Create the Todo list project from The Odin Project.', '2023-12-20', 'High', 'Coding');
+        makeTodo('Record YouTube Video', 'Make a "day in my life" video for the channel. YT.com@wesleyoaks', '2023-12-18', 'Medium', 'YouTube');
+        makeTodo('Return Library Books', 'I almost forgot to return the books last time... not again!', '2023-12-19', 'Low', 'Default');
+        makeCategory('Coding');
+        makeCategory('YouTube');
+
+        toLocalStorage();
+
+    };
+
+})();
 
 let editingTask = '';
 
@@ -98,6 +120,7 @@ function newTask() {
     description.style.backgroundColor = null;
     due.style.backgroundColor = null;
 
+    toLocalStorage();
     clearDisplay();
     displayTasks();
 
@@ -171,6 +194,7 @@ function displayTasks() {
             const index = todoList.findIndex(task => task.title === deleteBtn.value);
             deleteTodo(index);
             task.remove();
+            toLocalStorage();
             
         };
 
@@ -200,7 +224,7 @@ function displayTasks() {
 
             };
 
-            console.log(todoList)
+            toLocalStorage();
 
         };
 
@@ -268,7 +292,7 @@ function closeTaskModal() {
 
 function addNewCat() {
 
-    if (modalCatInput.value !== '' && categories.indexOf(modalCatInput.value) < 0) {
+    if (modalCatInput.value !== '' && !isNaN(modalCatInput.value) === false && categories.indexOf(modalCatInput.value) < 0) {
         
         makeCategory(modalCatInput.value); 
 
@@ -295,6 +319,8 @@ function addNewCat() {
         modalCatInput.value = ''
         modalCatInput.focus();
 
+        toLocalStorage();
+
     };
 
 };
@@ -313,6 +339,8 @@ function removeSelectedCat() {
     removeOption.forEach((item) => {
         item.remove();
     });
+
+    toLocalStorage();
 
     removeCategoryList.style.backgroundColor = '';
 
@@ -424,9 +452,17 @@ function updateTask() {
     todoList[index].priority = editModalPriority.value;
     todoList[index].category = editModalCategory.value;
     
+    toLocalStorage();
     closeTaskModal();
     clearDisplay();
     displayTasks();
+
+};
+
+function toLocalStorage() {
+
+    localStorage.setItem('todo', JSON.stringify(todoList));
+    localStorage.setItem('category', JSON.stringify(categories));
 
 };
 
