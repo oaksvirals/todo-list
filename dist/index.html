@@ -3,9 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/ico" href="./images/favicon.ico">
     <title>A Todo List App</title>
-<script defer src="bundlec8c90135bd1b846eaf0e.js"></script></head>
+<script defer src="bundled555e0de6cf4826efa79.js"></script></head>
 <body>
-    <h1>Test 2</h1>
+    <div class="app">
+        <header>
+            <h1>A Todo List App</h1>
+        </header>
+        <aside>
+            <!-- new tasks area of sidebar -->
+            <section class="newTasks">
+                <h2>New Task</h2>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title"  maxlength="28" placeholder="Max 28 characters" required/>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" maxlength="230" placeholder="Max 230 characters" required/>
+                <label for="due">Due</label>
+                <input type="date" id="due" name="due" required/>
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                </select>
+                <button id="addItem">Add Item</button>
+                <button id="manageCategoryBtn">Manage Categories</button>
+                <button id="hideCompleteBtn">Hide Completed</button>
+            </section>
+            <!-- filter view area of sidebar -->
+            <section class="filter">
+                <h2>Filter View</h2>
+                <label for="filterCategory">Category</label>
+                <select name="filterCategory" id="filterCategory">
+                    <option value="none">(Sort by Category)</option>
+                </select>
+                <label for="filterPriority">Priority</label>
+                <select name="filterPriority" id="filterPriority">
+                    <option value="none">(Sort by Priority)</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <button class="resetFilterBtn">Clear Filter</button>
+            </section>
+            <a href="https://github.com/oaksvirals/todo-list" target="_blank"> <button class="github">Github</button> </a>
+        </aside>
+        <main>
+        </main>
+        <section class="catModal hidden">
+            <h2>Add Categories</h2>
+            <input class="modalCatInput" type="text" maxlength="10" placeholder="Max 10 Characters" />
+            <button class="modalAddCategory">Add</button>
+            <h2>Remove Categories</h2>
+            <select name="removeCategory" id="removeCategory"></select>
+            <button class="removeCategoryBtn">Remove</button>
+            <button class="modalCloseCategoryMenu">Return</button>
+        </section>
+        <section class="taskModal hidden">
+            <h2>Edit Task</h2>
+            <label for="taskModalTitle">Title</label>
+            <input id="taskModalTitle" type="text" maxlength="28" placeholder="Max 28 characters">
+            <label for="taskModalDescription">Description</label>
+            <input id="taskModalDescription" type="text" maxlength="230" placeholder="Max 230 characters">
+            <label for="taskModalDue">Due</label>
+            <input type="date" name="taskModalDue" id="taskModalDue">
+            <label for="taskModalPriority">Priority</label>
+            <select name="taskModalPriority" id="taskModalPriority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <label for="taskModalCategory">Category</label>
+            <select name="taskModalCategory" id="taskModalCategory"></select>
+            <button class="taskModalSubmitBtn">Submit Changes</button>
+            <button class="taskModalExitBtn">Exit</button>
+        </section>
+    </div>
 </body>
 </html>
